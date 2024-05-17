@@ -50,6 +50,8 @@ static char	**alloc_split(char const *s, char c, char **split)
 			while (*(s + i + j) != c && *(s + i + j) != '\0')
 				j++;
 			split[k] = malloc((j + 1) * 1);
+			if (!split[k])
+				return (0);
 			k++;
 			i = i + j;
 			j = 0;
@@ -104,6 +106,8 @@ char	**ft_split(char const *s, char c)
 		return (0);
 	j = 0;
 	split = alloc_split(s, c, split);
+	if (!split)
+		return (0);
 	split = split_string(s, c, split, j);
 	return (split);
 }

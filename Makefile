@@ -61,7 +61,7 @@ OBJS = ${SRCS:.c=.o}
 
 OBJS_BON = ${BONUS:.c=.o}
 
-CC = gcc
+CC = cc
 
 RM = rm -f
 

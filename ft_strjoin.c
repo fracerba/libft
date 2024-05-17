@@ -26,12 +26,11 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	while (*(s2 + j) != '\0')
 		j++;
 	join = malloc((i + j + 1) * 1);
-	i = 0;
-	while (*(s1 + i) != '\0')
-	{
+	if (!join)
+		return (0);
+	i = -1;
+	while (*(s1 + (++i)) != '\0')
 		*(join + i) = *(s1 + i);
-		i++;
-	}
 	j = 0;
 	while (*(s2 + j) != '\0')
 	{

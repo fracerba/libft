@@ -13,21 +13,21 @@
 #include "libft.h"
 #include <stdlib.h>
 
-static int	check_start(char const *s1, char const *set)
+static int	check_start(char const *s1, char const *set, int b)
 {
 	int		i;
 	int		j;
-	int		b;
 	int		c;
+	int		k;
 
-	b = 1;
 	c = 0;
 	i = 0;
 	while (*(s1 + i) != '\0' && b == 1)
 	{
 		b = 0;
 		j = 0;
-		while (*(set + j) != '\0')
+		k = c;
+		while (*(set + j) != '\0' && k == c)
 		{
 			if (*(s1 + i) == *(set + j))
 			{
@@ -41,21 +41,21 @@ static int	check_start(char const *s1, char const *set)
 	return (c);
 }
 
-static int	check_end(char const *s1, char const *set, int len)
+static int	check_end(char const *s1, char const *set, int len, int b)
 {
 	int		i;
 	int		j;
-	int		b;
 	int		c;
+	int		k;
 
-	b = 1;
 	c = 0;
 	i = 1;
 	while (len > i && b == 1)
 	{
 		b = 0;
 		j = 0;
-		while (*(set + j) != '\0')
+		k = c;
+		while (*(set + j) != '\0' && k == c)
 		{
 			if (*(s1 + len - i) == *(set + j))
 			{
@@ -94,14 +94,14 @@ char	*ft_strtrim(char const *s1, char const *set)
 	i = 0;
 	while (*(s1 + i) != '\0')
 		i++;
-	k = check_start(s1, set) + check_end(s1, set, i);
+	k = check_start(s1, set, 1) + check_end(s1, set, i, 1);
 	if (k > i)
 		k = i;
 	trim = malloc((i - k + 1) * 1);
 	if (!trim)
 		return (0);
 	i = i - k;
-	k = check_start(s1, set);
+	k = check_start(s1, set, 1);
 	trim = ft_setstr(s1, trim, k, i);
 	return (trim);
 }
